@@ -2,43 +2,36 @@ import React from 'react';
 import {
   Alert,
   Button,
+  Platform,
   SafeAreaView,
   ScrollView,
+  StyleSheet,
   Text,
   TextInput,
+  ImageBackground,
+  Image,
 } from 'react-native';
+import {Colors} from 'react-native-paper';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
 import * as D from './src/data';
+import MainScreen from './src/screens/MainScreen';
 
-import ClassComponent from './src/screens/ClassComponent';
-import ArrowComponent from './src/screens/ArrowComponent';
-import Person from './src/screens/Person';
-
-const people = D.makeArray(100).map(D.createRandomPerson);
-
+const avatarUrl = D.randomAvatarUrl();
+const avatarSize = 50;
+const iconOnPress = () => {
+  console.log('hello');
+};
 export default function App() {
-  const children = people.map(person => (
-    <Person key={person.id} person={person} />
-  ));
   return (
-    <SafeAreaView>
-      <Button
-        title="안녕해요"
-        color="blue"
-        onPress={() => console.log('안녕해요~')}
-      />
-      <Button
-        title="놀라워요"
-        color="red"
-        onPress={() => Alert.alert('놀라워요~', '세상에나!')}
-      />
-      <TextInput
-        placeholder="enter your name"
-        onChangeText={(text: string) => console.log(text)}
-        onFocus={() => console.log('onFocus')}
-        onBlur={() => console.log('onBlur')}
-        onEndEditing={() => console.log('onEndEditing')}
-      />
-      <ScrollView>{children}</ScrollView>
-    </SafeAreaView>
+    <>
+      <MainScreen />
+    </>
   );
 }
+
+const styles = StyleSheet.create({
+  view: {flex: 1},
+  text: {fontFamily: 'DancingScript-Regular', color: Colors.amber100},
+  image: {width: avatarSize, height: avatarSize, borderRadius: avatarSize},
+});
