@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import type {FC} from 'react';
 import * as D from '../data';
 import {Alert, Image, Text, View} from 'react-native';
@@ -14,11 +14,14 @@ export type PersonProps = {
   person: D.IPerson;
 };
 
-const avatarPressed = () => Alert.alert('avatar pressed');
-const deletePressed = () => Alert.alert('qwer pressed');
-const countIconPressed = (name: string) => Alert.alert(`${name} pressed`);
-
 const Person: FC<PersonProps> = ({person}) => {
+  const avatarPressed = useCallback(() => Alert.alert('avatar pressed'), []);
+  const deletePressed = useCallback(() => Alert.alert('qwer pressed'), []);
+  const countIconPressed = useCallback(
+    (name: string) => Alert.alert(`${name} pressed`),
+    [],
+  );
+
   return (
     <View style={[styles.view]}>
       <View style={[styles.leftView]}>
